@@ -23,9 +23,7 @@ export default function NavComponent({ currency, changeCurrency , dataCar,setDat
     const {sendOrders} = useOrders()
 
     const save = async (orders: order[], total: number) => {
-      const response = await sendOrders(orders, total)
-      console.log('xd',response);
-      
+      const response = await sendOrders(orders, total)      
       if(response){
         setopenCar(false)
          setData([])

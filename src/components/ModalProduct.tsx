@@ -47,7 +47,7 @@ export default function ModalProduct({ onSave } : ModalProps){
         <InputLabel>Tipo</InputLabel>
         <Select value={tipo} onChange={(e) => setTipo(e.target.value as string)}>
           <MenuItem value="Oro">Oro</MenuItem>
-          <MenuItem value="Oro Rosado">Oro Rosado</MenuItem>
+          <MenuItem value="Oro">Oro Rosado</MenuItem>
           <MenuItem value="Plata">Plata</MenuItem>
           <MenuItem value="Niquel">Niquel</MenuItem>
         </Select>

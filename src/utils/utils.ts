@@ -41,7 +41,6 @@ const cueroPrice = (dije : string, tipo: string) =>{
     if (dije === "Martillo") {
         switch (tipo) {
             case 'Oro':
-            case 'Oro Rosado':
                 return 100
             case 'Plata':
                 return 80
@@ -55,7 +54,6 @@ const cueroPrice = (dije : string, tipo: string) =>{
     } else {
         switch (tipo) {
             case 'Oro':
-            case 'Oro Rosado':
                 return 120
 
             case 'Plata':
@@ -75,7 +73,6 @@ const cuerdaPrice = (dije : string, tipo: string) =>{
     if (dije === "Martillo") {
         switch (tipo) {
             case 'Oro':
-            case 'Oro Rosado':
                 return 90
             case 'Plata':
                 return 70
@@ -89,7 +86,6 @@ const cuerdaPrice = (dije : string, tipo: string) =>{
     } else {
         switch (tipo) {
             case 'Oro':
-            case 'Oro Rosado':
                 return 110
 
             case 'Plata':

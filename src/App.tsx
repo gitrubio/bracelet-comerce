@@ -3,7 +3,7 @@ import { Box, Tooltip, Grid, Modal, Button } from "@mui/material";
 import NavComponent from "./components/NavComponent";
 import CardProduct from "./components/CardProduct";
 import { currencyMoney, order } from "./interfaces";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import AddIcon from "@mui/icons-material/Add";
 import { useProducts } from "./hooks/useProducts";
 import Loader from "./components/Loader";
@@ -17,6 +17,7 @@ function App() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { products, loading } = useProducts();
+
   const change = () => {
     if (currency === "USD") {
       setcurrency("COP");
@@ -24,14 +25,20 @@ function App() {
       setcurrency("USD");
     }
   };
-  useEffect(()=>{
-console.log('dadada',dataCart);
-
-  },[dataCart])
 
 
-  const saveOrder = (order : Omit<order,'id'>) => {
-    setDataCart([...dataCart,order])
+
+  const saveOrder = (order : order) => {
+    let exist = false
+    const newData = dataCart.map((data)=>{
+      if(data.material === order.material && data.dije === order.dije && data.TypeMaterial === order.TypeMaterial){
+        data.cantidad += order.cantidad
+        data.total += order.total
+        exist = true
+      }
+      return data
+    })
+    setDataCart(exist ? newData : [...newData,order])
     handleClose()
   }
 
