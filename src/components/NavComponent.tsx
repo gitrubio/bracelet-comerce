@@ -13,7 +13,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-export default function NavComponent() {
+import { NavProps } from "../interfaces";
+export default function NavComponent({currency, changeCurrency} : NavProps) {
   return (
     <>
       <Grid item xs={6} md={8}>
@@ -51,6 +52,17 @@ export default function NavComponent() {
           justifyContent={"center"}
           alignItems={"center"}
         >
+          <Button variant="outlined" size="large" sx={{ borderRadius: 4 }} onClick={changeCurrency}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              height={24}
+              width={24}
+            >
+              {`$${currency}`}
+            </Box>
+          </Button>
           <Button variant="outlined" size="large" sx={{ borderRadius: 4 }}>
             <Box
               display="flex"

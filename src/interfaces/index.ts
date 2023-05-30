@@ -8,9 +8,13 @@ export interface ProductProps {
     dije : dije
     TypeMaterial : TypeMaterial
     currency? : currencyMoney
+    img : string
 }
 
-
+export interface NavProps {
+    currency : currencyMoney
+    changeCurrency: () => void
+}
 
 type Material = 'Cuero' | 'Cuerda'
 type dije = 'Martillo' | 'Ancla'

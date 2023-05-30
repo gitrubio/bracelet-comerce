@@ -1,26 +1,27 @@
-import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Rating, Typography } from '@mui/material'
+import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Rating, Stack, Typography } from '@mui/material'
 import React from 'react'
-import pulsera from '../assets/pulseraVerde.jpg'
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { formatPrice } from '../utils/utils';
 import { ProductProps } from '../interfaces';
-
-export default function CardProduct({ description, price, TypeMaterial ,dije, material ,starts, currency} : ProductProps) {
+import { CardActionArea } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+export default function CardProduct({ description, price, img,starts, currency} : ProductProps) {
   return (
-    <Card sx={{ width: 280 , margin : 2}}>
+    <Card sx={{ width: 250 , margin : 2}}>
+    <CardActionArea>
     <CardHeader
       title={formatPrice(price, currency || 'USD')}
       action={
-        <IconButton aria-label="settings">
-          <FavoriteIcon />
-        </IconButton>
+        <IconButton aria-label="share">
+        <AddIcon />
+      </IconButton>
       }
      
     />
     <CardMedia
       component="img"
       height="194"
-      image={pulsera}
+      image={img}
       alt="Pulsera"
     />
     <CardContent>
@@ -28,9 +29,12 @@ export default function CardProduct({ description, price, TypeMaterial ,dije, ma
        {description}
       </Typography>
     </CardContent>
-    <CardActions disableSpacing>
+    <CardActions >
+      <Stack direction={'row'} display={'flex'} justifyContent={'space-between'}>
       <Rating name="half-rating" defaultValue={starts} precision={0.5} />
+      </Stack>
     </CardActions>
+    </CardActionArea>
   </Card>
   )
 }
