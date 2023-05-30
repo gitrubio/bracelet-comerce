@@ -2,14 +2,16 @@ import "./App.css";
 import { Box, Tooltip, Grid, Modal, Button, Skeleton } from "@mui/material";
 import NavComponent from "./components/NavComponent";
 import CardProduct from "./components/CardProduct";
-import { Products, currencyMoney } from "./interfaces";
-import { useState } from "react";
+import { Products, currencyMoney, order } from "./interfaces";
+import { useState, useEffect } from 'react';
 import AddIcon from "@mui/icons-material/Add";
 import { useProducts } from "./hooks/useProducts";
 import Loader from "./components/Loader";
+import { style } from "./utils/utils";
+import ModalProduct from "./components/ModalProduct";
 
 function App() {
-  const [dataCart, setDataCart] = useState<Products[]>([]);
+  const [dataCart, setDataCart] = useState<Omit<order,'id'>[]>([]);
   const [currency, setcurrency] = useState<currencyMoney>("USD");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -22,6 +24,16 @@ function App() {
       setcurrency("USD");
     }
   };
+  useEffect(()=>{
+console.log('dadada',dataCart);
+
+  },[dataCart])
+
+
+  const saveOrder = (order : Omit<order,'id'>) => {
+    setDataCart([...dataCart,order])
+    handleClose()
+  }
 
   return (
     <div style={{ width: "100%", height: "100%", margin: 0 }}>
@@ -31,7 +43,9 @@ function App() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <></>
+        <Box sx={style}>
+          <ModalProduct onSave={saveOrder}/>
+        </Box>
       </Modal>
       {!loading ? (
         <Grid container spacing={2}>
@@ -63,7 +77,7 @@ function App() {
           </Grid>
           {products?.map((item) => (
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <CardProduct {...{ ...item, currency }}></CardProduct>
+              <CardProduct producto={item} img={item.img} currency={currency} onSave={saveOrder} ></CardProduct>
             </Grid>
           ))}
         </Grid>

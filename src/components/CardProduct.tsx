@@ -2,17 +2,25 @@ import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Rati
 import React from 'react'
 
 import { formatPrice } from '../utils/utils';
-import { ProductProps } from '../interfaces';
+import { ProductProps, order } from '../interfaces';
 import { CardActionArea } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-export default function CardProduct({ description, price, img,starts, currency} : ProductProps) {
+export default function CardProduct({ producto, img, currency, onSave} : ProductProps, onClick: (order : Omit<order, 'id'>) => void) {
   return (
     <Card sx={{ width: 250 , margin : 2}}>
     <CardActionArea>
     <CardHeader
-      title={formatPrice(price, currency || 'USD')}
+      title={formatPrice(producto.price, currency || 'USD')}
       action={
-        <IconButton aria-label="share">
+        <IconButton aria-label="share" 
+        onClick={()=> onSave(
+            {cantidad : 1, 
+            date : new Date(),
+            dije :producto.dije,
+            material : producto.material,
+            total : producto.price,
+            TypeMaterial : producto.TypeMaterial, 
+        })}>
         <AddIcon />
       </IconButton>
       }
@@ -26,12 +34,12 @@ export default function CardProduct({ description, price, img,starts, currency} 
     />
     <CardContent>
       <Typography variant="body2" color="text.secondary">
-       {description}
+       {producto.description}
       </Typography>
     </CardContent>
     <CardActions >
       <Stack direction={'row'} display={'flex'} justifyContent={'space-between'}>
-      <Rating name="half-rating" defaultValue={starts} precision={0.5} />
+      <Rating name="half-rating" defaultValue={producto.starts} precision={0.5} />
       </Stack>
     </CardActions>
     </CardActionArea>

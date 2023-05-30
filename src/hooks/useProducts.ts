@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import ProductServices from "../services"
-import { ProductProps, Products } from '../interfaces';
+import { ProductProps, ProductResponse, Products } from '../interfaces';
 
 export const useProducts = () => {
-    const [products, setproducts] = useState<ProductProps[]>([])
+    const [products, setproducts] = useState<ProductResponse[]>([])
     const [loading, setloadings] = useState<boolean>(false)
         const getAll = async () => {
             setloadings(true)

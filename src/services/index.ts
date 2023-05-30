@@ -1,15 +1,15 @@
 import { doc, getDocs, query , setDoc} from "firebase/firestore";
-import { productsCollectionRef } from "../firebase/provider"
-import { ProductProps, Products, ResponseFirbase } from "../interfaces";
+import { productsCollectionRef ,ordenesCollectionRef} from "../firebase/provider"
+import { ProductProps, ProductResponse, Products, ResponseFirbase, order } from "../interfaces";
 
 
 const ProductServices = {
 
-    async getAll(): Promise<ResponseFirbase<ProductProps[]>> {
+    async getAll(): Promise<ResponseFirbase<ProductResponse[]>> {
             try {
-                const queryData = query<ProductProps>(productsCollectionRef);
-                const querySnapshot = await getDocs<ProductProps>(queryData);
-                const Materials: ProductProps[] = []
+                const queryData = query<ProductResponse>(productsCollectionRef);
+                const querySnapshot = await getDocs<ProductResponse>(queryData);
+                const Materials: ProductResponse[] = []
     
                 querySnapshot.forEach((doc) => {
                     const data: any = doc.data();
@@ -21,16 +21,19 @@ const ProductServices = {
                 console.log('fallo',error)
                 return { data: [], status: 'error' }
             }
-        },
-    async sendOrder( product : Omit<ProductProps, 'img'| 'currency'>): Promise<ResponseFirbase<Omit<Products, 'id'>>> {
+        }
+}
+export const OrderServices = {
+
+    async sendOrder( order : Omit<order, 'id'>): Promise<ResponseFirbase<Omit<order, 'id'>>> {
             try {
                 
-                const response = await setDoc(doc(productsCollectionRef),product)
+                const response = await setDoc(doc(ordenesCollectionRef),order)
                
-                return { data: product, status: 'success' }
+                return { data: order, status: 'success' }
             } catch (error) {
                 console.log('fallo',error)
-                return { data: {} as Products, status: 'error' }
+                return { data: {} as order, status: 'error' }
             }
         }
 }

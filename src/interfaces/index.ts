@@ -9,9 +9,28 @@ export interface Products {
     dije : dije
     TypeMaterial : TypeMaterial
 }
-export interface ProductProps extends Omit<Products, 'id'> {
-    currency? : currencyMoney
+
+export interface order {
+    id : string
+    cantidad : number
+    material : Material
+    dije : dije
+    TypeMaterial : TypeMaterial
+    total : number
+    date: Date
+}
+
+export interface ProductResponse  extends Products{
     img : string
+}
+export interface ModalProps {
+    onSave: ( item : Omit<order, 'id'>) => void
+}
+export interface ProductProps {
+    currency? : currencyMoney
+    producto : Products
+    img : string
+    onSave: ( item : Omit<order, 'id'>) => void
 }
 
 export interface ResponseFirbase <T>{
@@ -25,7 +44,7 @@ export interface NavProps {
     onClickCar: () => void
 }
 
-type status = 'success' | 'error'
-type Material = 'Cuero' | 'Cuerda'
-type dije = 'Martillo' | 'Ancla'
-type TypeMaterial =  'oro'|  'baño de oro' | 'oro rosado' |   'plata' | 'Níquel'
+export type status = 'success' | 'error'
+export type Material = 'Cuero' | 'Cuerda'
+export type dije = 'Martillo' | 'Ancla'
+export type TypeMaterial =  'oro'|  'baño de oro' | 'oro rosado' |   'plata' | 'Níquel'

@@ -1,80 +1,67 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Grid, MenuItem } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button, Grid, Typography } from '@mui/material';
+import {Material, ModalProps, TypeMaterial, dije} from '../interfaces'
+import { calculateTotal } from '../utils/utils';
+export default function ModalProduct({ onSave } : ModalProps){
+  const [material, setMaterial] = useState('');
+  const [dije, setDije] = useState('');
+  const [tipo, setTipo] = useState('');
+  const [cantidad, setCantidad] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+       const totalBuy =  calculateTotal(cantidad,material,dije,tipo)
+       onSave({
+        cantidad : +cantidad,
+        date : new Date(),
+        dije : dije as dije,
+        material : material as Material,
+        total : totalBuy,
+        TypeMaterial : tipo as TypeMaterial
+       })
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+    <Grid container lg={12} display={'flex'} justifyContent={'center'}>
+        <Typography>Crea tu pulsera</Typography>
+    </Grid>
+      <FormControl fullWidth margin="normal" required>
+        <InputLabel>Material de la Manilla</InputLabel>
+        <Select value={material} onChange={(e) => setMaterial(e.target.value as string)}>
+          <MenuItem value="Cuero">Cuero</MenuItem>
+          <MenuItem value="Cuerda">Cuerda</MenuItem>
+        </Select>
+      </FormControl>
 
 
-const currencies = [
-    {
-        value: 'USD',
-        label: '$',
-    },
-    {
-        value: 'EUR',
-        label: '€',
-    },
-    {
-        value: 'BTC',
-        label: '฿',
-    },
-    {
-        value: 'JPY',
-        label: '¥',
-    },
-];
+      <FormControl fullWidth margin="normal" required>
+        <InputLabel>Dije</InputLabel>
+        <Select value={dije} onChange={(e) => setDije(e.target.value as string)}>
+          <MenuItem value="Martillo">Martillo</MenuItem>
+          <MenuItem value="Ancla">Ancla</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth margin="normal" required>
+        <InputLabel>Tipo</InputLabel>
+        <Select value={tipo} onChange={(e) => setTipo(e.target.value as string)}>
+          <MenuItem value="Oro">Oro</MenuItem>
+          <MenuItem value="Oro Rosado">Oro Rosado</MenuItem>
+          <MenuItem value="Plata">Plata</MenuItem>
+          <MenuItem value="Niquel">Niquel</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth margin="normal" required >
+        <TextField label="Cantidad" type="number" value={cantidad} onChange={(e) => setCantidad(e.target.value)} />
+      </FormControl>
+
+      <Button variant="contained" color="primary" type="submit">
+        Agregar al carrito
+      </Button>
+    </form>
+  );
+};
 
 
-
-export const FormSelectManilla = () => {
-
-
-    return (
-        <Box
-            component="form"
-            width={'100%'}
-            noValidate
-            autoComplete="off"
-        >
-            <Grid
-                container
-                rowGap={2}
-                columnGap={2}
-                display={'flex'}
-                justifyContent={'center'}>
-                <Grid
-                    item
-                    xs={12}
-                    md={5}
-                >
-                    <TextField
-                        label="Number"
-                        type="number"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        sx={{
-                            width: '100%'
-                        }}
-                    />
-
-                </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    md={5} >
-                    <TextField
-                        select
-                        label="Select"
-                        defaultValue="EUR"
-                        helperText="Por favor, seleccione el dije "
-                        sx={{
-                            width: '100%'
-                        }}
-                    >
-
-                    </TextField>
-
-                </Grid>
-            </Grid>
-        </Box>
-    )
-}
