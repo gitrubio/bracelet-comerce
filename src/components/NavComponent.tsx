@@ -12,6 +12,7 @@ import {
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 export default function NavComponent() {
   return (
     <>
@@ -69,7 +70,7 @@ export default function NavComponent() {
               height={24}
               width={24}
             >
-              <AccountCircleIcon color="secondary" scale={2} />
+              <ShoppingCartIcon color="secondary" scale={2} />
             </Box>
           </Button>
         </Stack>
