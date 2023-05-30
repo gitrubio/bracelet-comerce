@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HistoryIcon from '@mui/icons-material/History';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { NavProps } from "../interfaces";
 export default function NavComponent({currency, changeCurrency} : NavProps) {
@@ -71,7 +71,7 @@ export default function NavComponent({currency, changeCurrency} : NavProps) {
               height={24}
               width={24}
             >
-              <AccountCircleIcon color="primary" scale={2} />
+              <HistoryIcon color="primary" scale={2} />
             </Box>
           </Button>
           <Button variant="contained" size="large" sx={{ borderRadius: 4 }}>

@@ -23,18 +23,18 @@ function App() {
       <Grid container spacing={2}>
         <NavComponent currency={currency} changeCurrency={change} />
 
-        <Grid item xs={6} md={12} display={"flex"}>
+        <Grid item xs={8} md={12} display={"flex"}>
           <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
-          <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
-          <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
-          <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
+          <CardProduct {...{...dataExample[1], currency}} ></CardProduct>
+          <CardProduct {...{...dataExample[2], currency}} ></CardProduct>
+          <CardProduct {...{...dataExample[3], currency}} ></CardProduct>
         </Grid>
         <Divider sx={{ height: 20 }} />
-        <Grid item xs={6} md={12} display={"flex"}>
-         <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
-          <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
-          <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
-          <CardProduct {...{...dataExample[0], currency}} ></CardProduct>
+        <Grid item xs={8} md={12} display={"flex"}>
+         <CardProduct {...{...dataExample[4], currency}} ></CardProduct>
+          <CardProduct {...{...dataExample[5], currency}} ></CardProduct>
+          <CardProduct {...{...dataExample[6], currency}} ></CardProduct>
+          <CardProduct {...{...dataExample[7], currency}} ></CardProduct>
         </Grid>
       </Grid>
     </div>
