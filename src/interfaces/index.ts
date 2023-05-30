@@ -1,12 +1,14 @@
 export type currencyMoney = 'COP' | 'USD'
 
-export interface ProductProps {
+export interface Products {
     description : string
     price : number
     starts : number
     material : Material
     dije : dije
     TypeMaterial : TypeMaterial
+}
+export interface ProductProps extends Products {
     currency? : currencyMoney
     img : string
 }

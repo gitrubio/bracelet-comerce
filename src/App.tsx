@@ -3,12 +3,12 @@ import {  Divider, Grid  } from "@mui/material";
 import NavComponent from "./components/NavComponent";
 import CardProduct from "./components/CardProduct";
 import { data } from "./utils/utils";
-import { currencyMoney } from "./interfaces";
+import { Products, currencyMoney } from "./interfaces";
 import { useState } from 'react';
 
 
 function App() {
-
+  const [dataCart, setDataCart] = useState<Products[]>([])
   const [currency, setcurrency] = useState<currencyMoney>('USD')
 
   const change = () => {
@@ -18,6 +18,7 @@ function App() {
       setcurrency('USD')
     }
   }
+
   return (
     <div style={{ width: "100%", height: "100%" ,margin: 0}}>
       <Grid container spacing={2}>

@@ -1,6 +1,6 @@
 import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Rating, Stack, Typography } from '@mui/material'
 import React from 'react'
-import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import { formatPrice } from '../utils/utils';
 import { ProductProps } from '../interfaces';
 import { CardActionArea } from '@mui/material';
