@@ -1,8 +1,8 @@
 import "./App.css";
-import { Box, Tooltip, Grid, Modal, Button, Skeleton } from "@mui/material";
+import { Box, Tooltip, Grid, Modal, Button } from "@mui/material";
 import NavComponent from "./components/NavComponent";
 import CardProduct from "./components/CardProduct";
-import { Products, currencyMoney, order } from "./interfaces";
+import { currencyMoney, order } from "./interfaces";
 import { useState, useEffect } from 'react';
 import AddIcon from "@mui/icons-material/Add";
 import { useProducts } from "./hooks/useProducts";
@@ -11,7 +11,7 @@ import { style } from "./utils/utils";
 import ModalProduct from "./components/ModalProduct";
 
 function App() {
-  const [dataCart, setDataCart] = useState<Omit<order,'id'>[]>([]);
+  const [dataCart, setDataCart] = useState<order[]>([]);
   const [currency, setcurrency] = useState<currencyMoney>("USD");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -52,8 +52,8 @@ console.log('dadada',dataCart);
           <NavComponent
             currency={currency}
             changeCurrency={change}
-            onClickCar={handleOpen}
-            onClickHistory={() => {}}
+            dataCar={dataCart}
+            setData={setDataCart}
           />
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Tooltip title="Crea tu Pulsera">

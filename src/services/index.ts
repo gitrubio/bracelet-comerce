@@ -1,6 +1,6 @@
 import { doc, getDocs, query , setDoc} from "firebase/firestore";
 import { productsCollectionRef ,ordenesCollectionRef} from "../firebase/provider"
-import { ProductProps, ProductResponse, Products, ResponseFirbase, order } from "../interfaces";
+import { ProductProps, ProductResponse, Products, ResponseFirbase, order, orderProducts } from "../interfaces";
 
 
 const ProductServices = {
@@ -25,15 +25,18 @@ const ProductServices = {
 }
 export const OrderServices = {
 
-    async sendOrder( order : Omit<order, 'id'>): Promise<ResponseFirbase<Omit<order, 'id'>>> {
+    async sendOrder( order : order[], total: number): Promise<ResponseFirbase<boolean>> {
             try {
-                
-                const response = await setDoc(doc(ordenesCollectionRef),order)
+                await setDoc(doc(ordenesCollectionRef),{
+                    products : order,
+                    date : new Date(),
+                    total : total
+                })
                
-                return { data: order, status: 'success' }
+                return { data: true, status: 'success' }
             } catch (error) {
                 console.log('fallo',error)
-                return { data: {} as order, status: 'error' }
+                return { data: false , status: 'error' }
             }
         }
 }

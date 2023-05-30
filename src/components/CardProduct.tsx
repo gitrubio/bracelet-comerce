@@ -14,7 +14,7 @@ export default function CardProduct({ producto, img, currency, onSave} : Product
       action={
         <IconButton aria-label="share" 
         onClick={()=> onSave(
-            {cantidad : 1, 
+            {cantidad : 1,
             date : new Date(),
             dije :producto.dije,
             material : producto.material,

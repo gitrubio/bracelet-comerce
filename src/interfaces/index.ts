@@ -10,8 +10,14 @@ export interface Products {
     TypeMaterial : TypeMaterial
 }
 
+export interface DrawerProps {
+    direction : "left" | "top" | "right" | "bottom" | undefined
+    open : boolean
+    cancel: () => void
+    data: Omit<order, 'id'>[]
+    onSave: (orders: order[], total: number) => Promise<void>
+}
 export interface order {
-    id : string
     cantidad : number
     material : Material
     dije : dije
@@ -20,6 +26,12 @@ export interface order {
     date: Date
 }
 
+export interface orderProducts {
+ id?: string
+ products : order[]
+ date : Date 
+ total : number
+}
 export interface ProductResponse  extends Products{
     img : string
 }
@@ -40,8 +52,8 @@ export interface ResponseFirbase <T>{
 export interface NavProps {
     currency : currencyMoney
     changeCurrency: () => void
-    onClickHistory: () => void
-    onClickCar: () => void
+    dataCar: Omit<order, 'id'>[]
+    setData: React.Dispatch<React.SetStateAction<order[]>>
 }
 
 export type status = 'success' | 'error'

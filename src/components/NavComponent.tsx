@@ -11,13 +11,30 @@ import {
   Tooltip,
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import Badge from '@mui/material/Badge';
 import Button from "@mui/material/Button";
 import HistoryIcon from "@mui/icons-material/History";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { NavProps } from "../interfaces";
-export default function NavComponent({ currency, changeCurrency , onClickCar , onClickHistory}: NavProps) {
-  return (
+import { NavProps, order } from "../interfaces";
+import PaymenComponent from "./PaymenComponent";
+import { useOrders } from "../hooks/useOrders";
+export default function NavComponent({ currency, changeCurrency , dataCar,setData}: NavProps) {
+    const [openCar, setopenCar] = useState(false)
+    const {sendOrders} = useOrders()
+
+    const save = async (orders: order[], total: number) => {
+      const response = await sendOrders(orders, total)
+      console.log('xd',response);
+      
+      if(response){
+        setopenCar(false)
+         setData([])
+        }
+      
+    }
+    return (
     <>
+    <PaymenComponent onSave={save} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
       <Grid xs={12} sm={6} md={6} lg={8}>
         <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
           <InputLabel htmlFor="search-input">Busca tu producto</InputLabel>
@@ -87,7 +104,8 @@ export default function NavComponent({ currency, changeCurrency , onClickCar , o
             </Button>
           </Tooltip>
           <Tooltip title="Carrito de compra">
-            <Button onClick={onClickCar} variant="contained" size="large" sx={{ borderRadius: 4 }}>
+          <Badge badgeContent={dataCar.length} color="error">
+            <Button onClick={()=>setopenCar(true)} variant="contained" size="large" sx={{ borderRadius: 4 }}>
               <Box
                 display="flex"
                 alignItems="center"
@@ -98,6 +116,7 @@ export default function NavComponent({ currency, changeCurrency , onClickCar , o
                 <ShoppingCartIcon color="secondary" scale={2} />
               </Box>
             </Button>
+            </Badge>
           </Tooltip>
         </Stack>
       </Grid>
