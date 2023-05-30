@@ -10,7 +10,7 @@ export function convertToCOP(amountUSD: number, exchangeRate = 5000) {
   return amountCOP;
 }
 
-export function formatPrice(price: number, currency: currencyMoney) {
+export function formatPrice(price: number, currency?: currencyMoney) {
   const formatter = new Intl.NumberFormat("es-CO", {
     style: "currency",
     currency: currency,
@@ -111,3 +111,7 @@ export const style = {
   boxShadow: 24,
   p: 4,
 };
+export const initialValue = {
+    open : false,
+    message : ''
+  }

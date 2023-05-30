@@ -30,9 +30,14 @@ export default function NavComponent({ currency, changeCurrency , dataCar,setDat
         }
       
     }
+
+    const onDelete = () => {
+      setData([])
+    }
+
     return (
     <>
-    <PaymenComponent onSave={save} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
+    <PaymenComponent onSave={save} currency={currency} onDelete={onDelete} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
       <Grid xs={12} sm={6} md={6} lg={8}>
         <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
           <InputLabel htmlFor="search-input">Busca tu producto</InputLabel>

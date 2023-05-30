@@ -13,9 +13,11 @@ export interface Products {
 export interface DrawerProps {
     direction : "left" | "top" | "right" | "bottom" | undefined
     open : boolean
+    currency? : currencyMoney
     cancel: () => void
     data: Omit<order, 'id'>[]
     onSave: (orders: order[], total: number) => Promise<void>
+    onDelete: () => void
 }
 export interface order {
     cantidad : number
