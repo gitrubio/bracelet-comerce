@@ -1,4 +1,4 @@
-import { doc, getDocs, query , setDoc} from "firebase/firestore";
+import { Unsubscribe, doc, getDocs, onSnapshot, orderBy, query , setDoc} from "firebase/firestore";
 import { productsCollectionRef ,ordenesCollectionRef} from "../firebase/provider"
 import { ProductProps, ProductResponse, Products, ResponseFirbase, order, orderProducts } from "../interfaces";
 
@@ -24,7 +24,23 @@ const ProductServices = {
         }
 }
 export const OrderServices = {
-
+     listerOrders(onSet : any): Unsubscribe | undefined {
+        try {
+            const queryData = query<orderProducts>(ordenesCollectionRef, orderBy("date", "asc"));
+        return onSnapshot(queryData, (querySnapshot) => {
+            if (!querySnapshot.empty) {
+                const modules: orderProducts[] = []
+                querySnapshot.forEach((doc) => modules.push({ id: doc.id, ...doc.data() }));
+                onSet(modules)
+            } else {
+                onSet([])
+            }
+        });
+          
+        } catch (error) {
+            console.log('fallo',error)
+        }
+    },
     async sendOrder( order : order[], total: number): Promise<ResponseFirbase<boolean>> {
             try {
                 await setDoc(doc(ordenesCollectionRef),{

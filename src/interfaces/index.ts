@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore"
+
 export type currencyMoney = 'COP' | 'USD'
 
 export interface Products {
@@ -10,12 +12,12 @@ export interface Products {
     TypeMaterial : TypeMaterial
 }
 
-export interface DrawerProps {
+export interface DrawerProps<T>{
     direction : "left" | "top" | "right" | "bottom" | undefined
     open : boolean
     currency? : currencyMoney
     cancel: () => void
-    data: Omit<order, 'id'>[]
+    data: T[]
     onSave: (orders: order[], total: number) => Promise<void>
     onDelete: () => void
 }
@@ -31,7 +33,7 @@ export interface order {
 export interface orderProducts {
  id?: string
  products : order[]
- date : Date 
+ date : any 
  total : number
 }
 export interface ProductResponse  extends Products{

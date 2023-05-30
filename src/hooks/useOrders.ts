@@ -1,28 +1,27 @@
 import { useEffect, useState } from 'react';
 import {OrderServices} from "../services"
-import { order } from '../interfaces/index';
+import { order, orderProducts } from '../interfaces/index';
 
 export const useOrders = () => {
-    const [orders, setorders] = useState<order[]>([])
+    const [orders, setorders] = useState<orderProducts[]>([])
     const [loading, setloadings] = useState<boolean>(false)
-        const getAll = async () => {
-           /*  setloadings(true)
-            const response =  await OrderServices.getAll()
-            if(response.status === 'success') setproducts(response.data)
-            setloadings(false) */
-        }
+
         const sendOrders = async (orders : order[],total : number) => {
            const {data,} = await OrderServices.sendOrder(orders,total)
-           if(data) {
-           
-           }
-
            return data
         }
         useEffect(()=>{
-            getAll()
+            const unsuscribe = OrderServices.listerOrders(setorders)
+            return () => {
+                if(unsuscribe) return unsuscribe()
+            }
         },[])
 
+        useEffect(()=>{
+            console.log('2',orders);
+            
+        },[orders])
+        
     return {
         orders,
         loading,

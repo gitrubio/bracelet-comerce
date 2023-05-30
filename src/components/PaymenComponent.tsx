@@ -1,7 +1,7 @@
 import { Drawer, Grid, Box, Typography } from "@mui/material";
 import React from "react";
-import { DrawerProps } from "../interfaces";
-import ProductList from "./ProductList";
+import { DrawerProps, order } from "../interfaces";
+import ProductItem from "./ProductItem";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
@@ -16,7 +16,7 @@ export default function PaymenComponent({
   onSave,
   onDelete,
   currency
-}: DrawerProps) {
+}: DrawerProps<order>) {
   const total = data.reduce((prev,next)=> prev + next.total,0)
   return (
     <Drawer anchor={direction} open={open} onClose={cancel}>
@@ -25,7 +25,7 @@ export default function PaymenComponent({
           <List sx={{ width: "100%", height: 600, overflowY: "auto" }}>
             {data.map((product, index) => (
               <ListItem key={index}>
-                <ProductList {...product}  />
+                <ProductItem {...product}  />
               </ListItem>
             ))}
           </List>

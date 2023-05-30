@@ -18,10 +18,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { NavProps, order } from "../interfaces";
 import PaymenComponent from "./PaymenComponent";
 import { useOrders } from "../hooks/useOrders";
+import HistoryDrawer from "./HistoryDrawer";
 export default function NavComponent({ currency, changeCurrency , dataCar,setData}: NavProps) {
     const [openCar, setopenCar] = useState(false)
-    const {sendOrders} = useOrders()
-
+    const [openHistory, setopenHistory] = useState(false)
+    const {sendOrders, orders} = useOrders()
     const save = async (orders: order[], total: number) => {
       const response = await sendOrders(orders, total)      
       if(response){
@@ -37,8 +38,9 @@ export default function NavComponent({ currency, changeCurrency , dataCar,setDat
 
     return (
     <>
+    <HistoryDrawer key={'history'} open={openHistory} cancel={()=>setopenHistory(false)} direction="left"  data={orders}/>
     <PaymenComponent onSave={save} currency={currency} onDelete={onDelete} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
-      <Grid xs={12} sm={6} md={6} lg={8}>
+      <Grid item xs={12} sm={6} md={6} lg={8}>
         <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
           <InputLabel htmlFor="search-input">Busca tu producto</InputLabel>
           <OutlinedInput
@@ -94,7 +96,7 @@ export default function NavComponent({ currency, changeCurrency , dataCar,setDat
             </Button>
           </Tooltip>
           <Tooltip title="Historial">
-            <Button variant="outlined" size="large" sx={{ borderRadius: 4 }}>
+            <Button onClick={()=>setopenHistory(true)} variant="outlined" size="large" sx={{ borderRadius: 4 }}>
               <Box
                 display="flex"
                 alignItems="center"
