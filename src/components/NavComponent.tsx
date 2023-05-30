@@ -8,18 +8,19 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Tooltip,
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import HistoryIcon from '@mui/icons-material/History';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HistoryIcon from "@mui/icons-material/History";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { NavProps } from "../interfaces";
-export default function NavComponent({currency, changeCurrency} : NavProps) {
+export default function NavComponent({ currency, changeCurrency }: NavProps) {
   return (
     <>
-      <Grid item xs={6} md={8}>
+      <Grid xs={12} sm={6} md={6} lg={8}>
         <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="search-input">Search</InputLabel>
+          <InputLabel htmlFor="search-input">Busca tu producto</InputLabel>
           <OutlinedInput
             id="search-input"
             type={"text"}
@@ -39,8 +40,10 @@ export default function NavComponent({currency, changeCurrency} : NavProps) {
       </Grid>
       <Grid
         item
-        xs={6}
+        xs={12}
+        sm={6}
         md={4}
+        lg={4}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -52,39 +55,50 @@ export default function NavComponent({currency, changeCurrency} : NavProps) {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Button variant="outlined" size="large" sx={{ borderRadius: 4 }} onClick={changeCurrency}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              height={24}
-              width={24}
+          <Tooltip title="Moneda de cobro">
+            <Button
+              variant="outlined"
+              size="large"
+              sx={{ borderRadius: 4 }}
+              onClick={changeCurrency}
             >
-              {`$${currency}`}
-            </Box>
-          </Button>
-          <Button variant="outlined" size="large" sx={{ borderRadius: 4 }}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              height={24}
-              width={24}
-            >
-              <HistoryIcon color="primary" scale={2} />
-            </Box>
-          </Button>
-          <Button variant="contained" size="large" sx={{ borderRadius: 4 }}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              height={24}
-              width={24}
-            >
-              <ShoppingCartIcon color="secondary" scale={2} />
-            </Box>
-          </Button>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                height={24}
+                width={24}
+              >
+                {`$${currency}`}
+              </Box>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Historial">
+            <Button variant="outlined" size="large" sx={{ borderRadius: 4 }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                height={24}
+                width={24}
+              >
+                <HistoryIcon color="primary" scale={2} />
+              </Box>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Carrito de compra">
+            <Button variant="contained" size="large" sx={{ borderRadius: 4 }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                height={24}
+                width={24}
+              >
+                <ShoppingCartIcon color="secondary" scale={2} />
+              </Box>
+            </Button>
+          </Tooltip>
         </Stack>
       </Grid>
     </>
