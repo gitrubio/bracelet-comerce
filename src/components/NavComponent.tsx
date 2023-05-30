@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import HistoryIcon from "@mui/icons-material/History";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { NavProps } from "../interfaces";
-export default function NavComponent({ currency, changeCurrency }: NavProps) {
+export default function NavComponent({ currency, changeCurrency , onClickCar , onClickHistory}: NavProps) {
   return (
     <>
       <Grid xs={12} sm={6} md={6} lg={8}>
@@ -87,7 +87,7 @@ export default function NavComponent({ currency, changeCurrency }: NavProps) {
             </Button>
           </Tooltip>
           <Tooltip title="Carrito de compra">
-            <Button variant="contained" size="large" sx={{ borderRadius: 4 }}>
+            <Button onClick={onClickCar} variant="contained" size="large" sx={{ borderRadius: 4 }}>
               <Box
                 display="flex"
                 alignItems="center"
