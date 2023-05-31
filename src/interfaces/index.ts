@@ -17,6 +17,7 @@ export interface DrawerProps<T>{
     open : boolean
     currency? : currencyMoney
     cancel: () => void
+    loading? : boolean
     data: T[]
     onSave: (orders: order[], total: number) => Promise<void>
     onDelete: () => void

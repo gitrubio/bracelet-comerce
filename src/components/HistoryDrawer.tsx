@@ -16,7 +16,7 @@ export default function HistoryDrawer({
     <Drawer anchor={direction} open={open} onClose={cancel}>
     <Grid container sx={{ width: 400, height: "100%" }}>
       <Grid item key={"list-products"}>
-        <List sx={{ width: "100%", height: 600, overflowY: "auto" }}>
+        <List sx={{ width: "100%", height: 800, overflowY: "auto" }}>
           {data.map((product, index) => (
             <ListItem key={product.id}>
              <OrderItem {...product}/>

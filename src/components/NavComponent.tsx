@@ -23,13 +23,15 @@ export default function NavComponent({ currency, changeCurrency , dataCar,setDat
     const [openCar, setopenCar] = useState(false)
     const [openHistory, setopenHistory] = useState(false)
     const {sendOrders, orders} = useOrders()
+    const [loading, setLoading] = useState(false)
     const save = async (orders: order[], total: number) => {
+      setLoading(true)
       const response = await sendOrders(orders, total)      
       if(response){
         setopenCar(false)
          setData([])
         }
-      
+        setLoading(false)
     }
 
     const onDelete = () => {
@@ -39,7 +41,7 @@ export default function NavComponent({ currency, changeCurrency , dataCar,setDat
     return (
     <>
     <HistoryDrawer key={'history'} open={openHistory} cancel={()=>setopenHistory(false)} direction="left"  data={orders}/>
-    <PaymenComponent onSave={save} currency={currency} onDelete={onDelete} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
+    <PaymenComponent onSave={save} loading={loading} currency={currency} onDelete={onDelete} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
       <Grid item xs={12} sm={6} md={6} lg={8}>
         <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
           <InputLabel htmlFor="search-input">Busca tu producto</InputLabel>

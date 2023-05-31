@@ -15,7 +15,8 @@ export default function PaymenComponent({
   data,
   onSave,
   onDelete,
-  currency
+  currency,
+  loading
 }: DrawerProps<order>) {
   const total = data.reduce((prev,next)=> prev + next.total,0)
   return (
@@ -42,8 +43,8 @@ export default function PaymenComponent({
             </Stack>
             <Divider orientation="horizontal" variant="middle" flexItem sx={{ margin: 2}}/>
               <Stack direction={'column'} spacing={2}>
-              <Button disabled={data.length === 0} onClick={()=> {onSave(data,total)}}variant="outlined" sx={{ width : '100%'}}>Ordenar Productos</Button>
-            <Button onClick={onDelete}variant="outlined" color="error" sx={{ width : '100%'}}>Limpiar Carrito</Button>
+              <Button  disabled={data.length === 0 || loading} onClick={()=> {onSave(data,total)}}variant="outlined" sx={{ width : '100%'}}>Ordenar Productos</Button>
+            <Button disabled={loading} onClick={onDelete}variant="outlined" color="error" sx={{ width : '100%'}}>Limpiar Carrito</Button>
               </Stack>
           </Box>
         </Grid>
