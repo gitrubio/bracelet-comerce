@@ -8,16 +8,43 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Tooltip,
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import Badge from '@mui/material/Badge';
 import Button from "@mui/material/Button";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-export default function NavComponent() {
-  return (
+import HistoryIcon from "@mui/icons-material/History";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { NavProps, order } from "../interfaces";
+import PaymenComponent from "./PaymenComponent";
+import { useOrders } from "../hooks/useOrders";
+import HistoryDrawer from "./HistoryDrawer";
+export default function NavComponent({ currency, changeCurrency , dataCar,setData}: NavProps) {
+    const [openCar, setopenCar] = useState(false)
+    const [openHistory, setopenHistory] = useState(false)
+    const {sendOrders, orders} = useOrders()
+    const [loading, setLoading] = useState(false)
+    const save = async (orders: order[], total: number) => {
+      setLoading(true)
+      const response = await sendOrders(orders, total)      
+      if(response){
+        setopenCar(false)
+         setData([])
+        }
+        setLoading(false)
+    }
+
+    const onDelete = () => {
+      setData([])
+    }
+
+    return (
     <>
-      <Grid item xs={6} md={8}>
+    <HistoryDrawer key={'history'} open={openHistory} cancel={()=>setopenHistory(false)} direction="left"  data={orders}/>
+    <PaymenComponent onSave={save} loading={loading} currency={currency} onDelete={onDelete} data={dataCar} open={openCar} direction="right" key={'paymen-drawer'} cancel={()=>setopenCar(false)} />
+      <Grid item xs={12} sm={6} md={6} lg={8}>
         <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="search-input">Search</InputLabel>
+          <InputLabel htmlFor="search-input">Busca tu producto</InputLabel>
           <OutlinedInput
             id="search-input"
             type={"text"}
@@ -37,8 +64,10 @@ export default function NavComponent() {
       </Grid>
       <Grid
         item
-        xs={6}
+        xs={12}
+        sm={6}
         md={4}
+        lg={4}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -50,28 +79,52 @@ export default function NavComponent() {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Button variant="outlined" size="large" sx={{ borderRadius: 4 }}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              height={24}
-              width={24}
+          <Tooltip title="Moneda de cobro">
+            <Button
+              variant="outlined"
+              size="large"
+              sx={{ borderRadius: 4 }}
+              onClick={changeCurrency}
             >
-              <AccountCircleIcon color="primary" scale={2} />
-            </Box>
-          </Button>
-          <Button variant="contained" size="large" sx={{ borderRadius: 4 }}>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              height={24}
-              width={24}
-            >
-              <AccountCircleIcon color="secondary" scale={2} />
-            </Box>
-          </Button>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                height={24}
+                width={24}
+              >
+                {`$${currency}`}
+              </Box>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Historial">
+            <Button onClick={()=>setopenHistory(true)} variant="outlined" size="large" sx={{ borderRadius: 4 }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                height={24}
+                width={24}
+              >
+                <HistoryIcon color="primary" scale={2} />
+              </Box>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Carrito de compra">
+          <Badge badgeContent={dataCar.length} color="error">
+            <Button onClick={()=>setopenCar(true)} variant="contained" size="large" sx={{ borderRadius: 4 }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                height={24}
+                width={24}
+              >
+                <ShoppingCartIcon color="secondary" scale={2} />
+              </Box>
+            </Button>
+            </Badge>
+          </Tooltip>
         </Stack>
       </Grid>
     </>
