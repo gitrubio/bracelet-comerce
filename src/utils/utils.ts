@@ -1,7 +1,4 @@
 import {
-  Material,
-  ProductProps,
-  TypeMaterial,
   currencyMoney,
 } from "../interfaces";
 

@@ -20,6 +20,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const firedb = getFirestore(app)
+//@ts-ignore
 const analytics = getAnalytics(app);
 
 export default firedb

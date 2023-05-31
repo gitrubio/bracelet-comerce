@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, CardContent, Typography, CardMedia, Box } from '@mui/material';
 import caja from '../assets/caja.png'
 

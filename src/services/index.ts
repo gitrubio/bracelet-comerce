@@ -1,6 +1,6 @@
 import { Unsubscribe, doc, getDocs, onSnapshot, orderBy, query , setDoc} from "firebase/firestore";
 import { productsCollectionRef ,ordenesCollectionRef} from "../firebase/provider"
-import { ProductProps, ProductResponse, Products, ResponseFirbase, order, orderProducts } from "../interfaces";
+import { ProductResponse, ResponseFirbase, order, orderProducts } from "../interfaces";
 
 
 const ProductServices = {

@@ -1,5 +1,3 @@
-import { Timestamp } from "firebase/firestore"
-
 export type currencyMoney = 'COP' | 'USD'
 
 export interface Products {
