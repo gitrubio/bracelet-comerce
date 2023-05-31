@@ -1,11 +1,9 @@
 import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Rating, Stack, Typography } from '@mui/material'
-import React from 'react'
-
 import { formatPrice } from '../utils/utils';
-import { ProductProps, order } from '../interfaces';
+import { ProductProps } from '../interfaces';
 import { CardActionArea } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-export default function CardProduct({ producto, img, currency, onSave} : ProductProps, onClick: (order : Omit<order, 'id'>) => void) {
+export default function CardProduct({ producto, img, currency, onSave} : ProductProps) {
   return (
     <Card sx={{ width: 250 , margin : 2}}>
     <CardActionArea>

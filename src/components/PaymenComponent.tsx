@@ -1,5 +1,4 @@
 import { Drawer, Grid, Box, Typography } from "@mui/material";
-import React from "react";
 import { DrawerProps, order } from "../interfaces";
 import ProductItem from "./ProductItem";
 import List from "@mui/material/List";

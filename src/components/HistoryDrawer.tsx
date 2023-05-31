@@ -1,5 +1,4 @@
 import { Drawer, Grid,   } from "@mui/material";
-import React from "react";
 import { DrawerProps, orderProducts } from "../interfaces";
 
 import List from "@mui/material/List";
@@ -17,7 +16,7 @@ export default function HistoryDrawer({
     <Grid container sx={{ width: 400, height: "100%" }}>
       <Grid item key={"list-products"}>
         <List sx={{ width: "100%", height: 800, overflowY: "auto" }}>
-          {data.map((product, index) => (
+          {data.map((product) => (
             <ListItem key={product.id}>
              <OrderItem {...product}/>
             </ListItem>

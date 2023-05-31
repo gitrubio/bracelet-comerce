@@ -7,6 +7,7 @@ export const useOrders = () => {
     const [loading, setloadings] = useState<boolean>(false)
 
         const sendOrders = async (orders : order[],total : number) => {
+            setloadings(false)
            const {data,} = await OrderServices.sendOrder(orders,total)
            return data
         }
@@ -16,11 +17,6 @@ export const useOrders = () => {
                 if(unsuscribe) return unsuscribe()
             }
         },[])
-
-        useEffect(()=>{
-            console.log('2',orders);
-            
-        },[orders])
         
     return {
         orders,
